@@ -7,6 +7,7 @@ import os, random, string
 from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+# basedir = os.path.abspath(os.path.dirname(__file__))
 
 class BaseConfig():
     
@@ -63,3 +64,5 @@ class BaseConfig():
 
         # This will create a file in <app> FOLDER
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'platformdb.sqlite3')
+
+    UPLOADED_PHOTOS_DEST = os.path.join(BASE_DIR, 'static/images')  #os.path.join(basedir, 'static/images')

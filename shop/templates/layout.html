@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        {% if title %}
+        <title>{{title}}</title>
+        {% else %}
+        <title>Pallete worldwide</title>
+        {% endif %}
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='img/logo/favicon.png')}}">
+
+
+        <!-- CSS here -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/swiper-bundle.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/slick.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/magnific-popup.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome-pro.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/flaticon_shofy.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/spacing.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    </head>
+
+    <body>
+
+
+        {% block content %}
+        
+
+        {% endblock content %}
+
+        <!-- JS here -->
+        <script src="{{url_for('static', filename='js/vendor/jquery.js')}}"></script>
+        <script src="{{url_for('static', filename='js/vendor/waypoints.js')}}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap-bundle.js')}}"></script>
+        <script src="{{url_for('static', filename='js/meanmenu.js')}}"></script>
+        <script src="{{url_for('static', filename='js/swiper-bundle.js')}}"></script>
+        <script src="{{url_for('static', filename='js/slick.js')}}"></script>
+        <script src="{{url_for('static', filename='js/range-slider.js')}}"></script>
+        <script src="{{url_for('static', filename='js/magnific-popup.js')}}"></script>
+        <script src="{{url_for('static', filename='js/nice-select.js')}}"></script>
+        <script src="{{url_for('static', filename='js/purecounter.js')}}"></script>
+        <script src="{{url_for('static', filename='js/countdown.js')}}"></script>
+        <script src="{{url_for('static', filename='js/wow.js')}}"></script>
+        <script src="{{url_for('static', filename='js/isotope-pkgd.js')}}"></script>
+        <script src="{{url_for('static', filename='js/imagesloaded-pkgd.js')}}"></script>
+        <script src="{{url_for('static', filename='js/ajax-form.js')}}"></script>
+        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+        <!-- scripts end here -->
+
+    </body>
+
+</html>
