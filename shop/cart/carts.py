@@ -1,16 +1,19 @@
-from flask import render_template,session, request,redirect,url_for,flash,current_app
+from flask import Blueprint, render_template, session, request, redirect, url_for, flash, current_app
 from shop import db , app
 from shop.models import Product
 from shop.products.routes import brands, categories
 import json
 
+
+carts = Blueprint('carts', __name__)
+
 def MagerDicts(dict1,dict2):
     if isinstance(dict1, list) and isinstance(dict2,list):
         return dict1  + dict2
-    if isinstance(dict1, dict) and isinstance(dict2, dict):
+    if isinstance(dict1, dict) and isinstance(dict2, dict): 
         return dict(list(dict1.items()) + list(dict2.items()))
 
-@app.route('/addcart', methods=['POST'])
+@carts.route('/addcart', methods=['POST'])
 def AddCart():
     try:
         product_id = request.form.get('product_id')
@@ -41,7 +44,7 @@ def AddCart():
 
 
 
-@app.route('/carts')
+@carts.route('/carts')
 def getCart():
     if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
         return redirect(url_for('home'))
@@ -57,7 +60,7 @@ def getCart():
 
 
 
-@app.route('/updatecart/<int:code>', methods=['POST'])
+@carts.route('/updatecart/<int:code>', methods=['POST'])
 def updatecart(code):
     if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
         return redirect(url_for('home'))
@@ -78,7 +81,7 @@ def updatecart(code):
 
 
 
-@app.route('/deleteitem/<int:id>')
+@carts.route('/deleteitem/<int:id>')
 def deleteitem(id):
     if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
         return redirect(url_for('home'))
@@ -93,10 +96,10 @@ def deleteitem(id):
         return redirect(url_for('getCart'))
 
 
-@app.route('/clearcart')
+@carts.route('/clearcart')
 def clearcart():
     try:
         session.pop('Shoppingcart', None)
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     except Exception as e:
         print(e)

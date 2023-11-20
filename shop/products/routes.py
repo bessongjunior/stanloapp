@@ -38,7 +38,9 @@ def Product_details():#(id):
     # return render_template('products/single_page.html',product=product,brands=brands(),categories=categories())
     return render_template('products/product-details.html',title='product details', brands=brands(), categories=categories())
 
-
+@product.route('/search_result')
+def search_results():
+    pass
 
 
 # @app.route('/brand/<int:id>')
