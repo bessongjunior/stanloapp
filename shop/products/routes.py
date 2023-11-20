@@ -16,12 +16,15 @@ def categories():
     return categories
 
 
+@product.route('/shop')
+def shop():
+    return render_template('products/shop-list.html', title='shop listing', brands=brands(),categories=categories())
 
 # @app.route('/')
 # def home():
 #     page = request.args.get('page',1, type=int)
 #     products = Product.query.filter(Product.stock > 0).order_by(Product.id.desc()).paginate(page=page, per_page=8)
-#     return render_template('products/index.html', products=products,brands=brands(),categories=categories())
+#     return render_template('products/index.html', products=products)
 
 # @app.route('/result')
 # def result():
@@ -33,7 +36,7 @@ def categories():
 def Product_details():#(id):
     # product = Product.query.get_or_404(id)
     # return render_template('products/single_page.html',product=product,brands=brands(),categories=categories())
-    return render_template('products/product-details.html',brands=brands(), categories=categories())
+    return render_template('products/product-details.html',title='product details', brands=brands(), categories=categories())
 
 
 
