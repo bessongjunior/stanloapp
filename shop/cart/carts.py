@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash, current_app
-from shop import db , app
+# from shop import db 
 from shop.models import Product
 from shop.products.routes import brands, categories
 import json
@@ -46,17 +46,18 @@ def AddCart():
 
 @carts.route('/carts')
 def getCart():
-    if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
-        return redirect(url_for('home'))
-    subtotal = 0
-    grandtotal = 0
-    for key,product in session['Shoppingcart'].items():
-        discount = (product['discount']/100) * float(product['price'])
-        subtotal += float(product['price']) * int(product['quantity'])
-        subtotal -= discount
-        tax =("%.2f" %(.06 * float(subtotal)))
-        grandtotal = float("%.2f" % (1.06 * subtotal))
-    return render_template('products/carts.html',tax=tax, grandtotal=grandtotal,brands=brands(),categories=categories())
+    # if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
+    #     return redirect(url_for('main.home'))
+    # subtotal = 0
+    # grandtotal = 0
+    # for key,product in session['Shoppingcart'].items():
+    #     discount = (product['discount']/100) * float(product['price'])
+    #     subtotal += float(product['price']) * int(product['quantity'])
+    #     subtotal -= discount
+    #     tax =("%.2f" %(.06 * float(subtotal)))
+    #     grandtotal = float("%.2f" % (1.06 * subtotal))
+    # return render_template('cart/carts.html',tax=tax, grandtotal=grandtotal,brands=brands(),categories=categories())
+    return render_template('cart/carts.html', title='cart')
 
 
 
@@ -84,7 +85,7 @@ def updatecart(code):
 @carts.route('/deleteitem/<int:id>')
 def deleteitem(id):
     if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     try:
         session.modified = True
         for key , item in session['Shoppingcart'].items():

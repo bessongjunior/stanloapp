@@ -90,12 +90,16 @@ def create_app(config_class=BaseConfig):
     from shop.error.handler import errors
     from shop.auth.routes import auth
     from shop.products.routes import product
+    from shop.cart.carts import carts
+    from shop.wishlist.wishlist import wishlists
     # app.register_blueprint(users)
     # app.register_blueprint(posts)
     app.register_blueprint(main)
     app.register_blueprint(errors)
     app.register_blueprint(auth)
     app.register_blueprint(product)
+    app.register_blueprint(carts)
+    app.register_blueprint(wishlists)
 
     return app
 
