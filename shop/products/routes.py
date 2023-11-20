@@ -40,7 +40,8 @@ def Product_details():#(id):
 
 @product.route('/search_result')
 def search_results():
-    pass
+    # searchword = request.args.get('q')
+    return render_template('products/search-results.html')
 
 
 # @app.route('/brand/<int:id>')
