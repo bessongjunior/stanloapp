@@ -41,36 +41,36 @@
                       <nav>
                          <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
                             <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                               <img src="assets/img/product/details/nav/product-details-nav-1.jpg" alt="">
+                               <img src="{{url_for('static', filename='img/product/details/nav/product-details-nav-1.jpg')}}" alt="">
                             </button>
                             <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">
-                               <img src="assets/img/product/details/nav/product-details-nav-2.jpg" alt="">
+                               <img src="{{url_for('static', filename='img/product/details/nav/product-details-nav-2.jpg')}}" alt="">
                             </button>
                             <button class="nav-link" id="nav-3-tab" data-bs-toggle="tab" data-bs-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">
-                               <img src="assets/img/product/details/nav/product-details-nav-3.jpg" alt="">
+                               <img src="{{url_for('static', filename='img/product/details/nav/product-details-nav-3.jpg')}}" alt="">
                             </button>
                             <button class="nav-link" id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">
-                               <img src="assets/img/product/details/nav/product-details-nav-4.jpg" alt="">
+                               <img src="{{url_for('static', filename='img/product/details/nav/product-details-nav-4.jpg')}}" alt="">
                             </button>
                             <button class="nav-link" id="nav-5-tab" data-bs-toggle="tab" data-bs-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">
-                               <img src="assets/img/product/details/nav/product-details-nav-5.jpg" alt="">
+                               <img src="{{url_for('static', filename='img/product/details/nav/product-details-nav-5.jpg')}}" alt="">
                             </button>
                          </div>
                       </nav>
                       <div class="tab-content m-img" id="productDetailsNavContent">
                          <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                             <div class="tp-product-details-nav-main-thumb">
-                               <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
+                               <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-1.jpg') }}" alt="">
                             </div>
                          </div>
                          <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab" tabindex="0">
                             <div class="tp-product-details-nav-main-thumb">
-                               <img src="assets/img/product/details/main/product-details-main-2.jpg" alt="">
+                               <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-2.jpg') }}" alt="">
                             </div>
                          </div>
                          <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab" tabindex="0">
                             <div class="tp-product-details-nav-main-thumb">
-                               <img src="assets/img/product/details/main/product-details-main-3.jpg" alt="">
+                               <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-3.jpg') }}" alt="">
                             </div>
                          </div>
                          <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab" tabindex="0">
@@ -80,7 +80,7 @@
                          </div>
                          <div class="tab-pane fade" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab" tabindex="0">
                             <div class="tp-product-details-nav-main-thumb">
-                               <img src="assets/img/product/details/main/product-details-main-5.jpg" alt="">
+                               <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-5.jpg') }}" alt="">
                             </div>
                          </div>
                        </div>
@@ -241,18 +241,16 @@
                       <nav>
                          <div class="nav nav-tabs justify-content-center p-relative tp-product-tab" id="navPresentationTab" role="tablist">
                            <button class="nav-link" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
-                           <button class="nav-link active" id="nav-addInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-addInfo" type="button" role="tab" aria-controls="nav-addInfo" aria-selected="false">Additional information</button>
                            <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews (2)</button>
-
                            <span id="productTabMarker" class="tp-product-details-tab-line"></span>
                          </div>
                        </nav>  
                        <div class="tab-content" id="navPresentationTabContent">
                          <div class="tab-pane fade" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" tabindex="0">
-                            <div class="tp-product-details-desc-wrapper pt-80">
+                            <div class="tp-product-details-desc-wrapper pt-80 pb-75">
                                <div class="row justify-content-center">
                                   <div class="col-xl-10">
-                                     <div class="tp-product-details-desc-item pb-105">
+                                     <div class="tp-product-details-desc-item">
                                         <div class="row">
                                            <div class="col-lg-6">
                                               <div class="tp-product-details-desc-content pt-25">
@@ -267,108 +265,11 @@
                                            </div>
                                            <div class="col-lg-6">
                                               <div class="tp-product-details-desc-thumb">
-                                                 <img src="assets/img/product/details/desc/product-details-desc-1.jpg" alt="">
+                                                 <img src="{{url_for('static', filename='img/product/details/desc/product-details-desc-1.jpg')}}" alt="">
                                               </div>
                                            </div>
                                         </div>
                                      </div>
-                                     <div class="tp-product-details-desc-item  pb-75">
-                                        <div class="row">
-                                           
-                                           <div class="col-lg-7">
-                                              <div class="tp-product-details-desc-thumb">
-                                                 <img src="assets/img/product/details/desc/product-details-desc-2.jpg" alt="">
-                                              </div>
-                                           </div>
-       
-                                           <div class="col-lg-5 order-first order-lg-last">
-                                              <div class="tp-product-details-desc-content des-content-2 pl-40">
-                                                 <h3 class="tp-product-details-desc-title">Carry with <br> Confidence and style</h3>
-                                                 <p>Wrap your tablet in a sleek case that's as stylish as it is convenient. Galaxy Tab S6 Lite Book Cover folds around and clings magnetically, so you can easily gear up as you're headed out the door. There's even a compartment for S pen, so you can be sure it doesn't get left behind.</p>
-                                              </div>
-                                           </div>
-                                        </div>
-                                     </div>
-                                     <div class="tp-product-details-desc-item">
-                                        <div class="row">
-                                           <div class="col-xl-12">
-                                              <div class="tp-product-details-desc-banner text-center m-img">
-                                                 <h3 class="tp-product-details-desc-banner-title tp-product-details-desc-title">Speed Memory Power = Epic Races</h3>
-                                                 <!-- <img src="assets/img/product/details/desc/product-details-desc-3.jpg" alt=""> -->
-                                                 <img src="{{ url_for('static', filename='img/product/desc/product-details-desc-3.jpg') }}" alt="">
-                                              </div>
-                                           </div>
-                                        </div>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                         </div>
-                         <div class="tab-pane fade show active" id="nav-addInfo" role="tabpanel" aria-labelledby="nav-addInfo-tab" tabindex="0">
-                            
-                            <div class="tp-product-details-additional-info ">
-                               <div class="row justify-content-center">
-                                  <div class="col-xl-10">
-                                     <table>
-                                        <tbody>
-                                           <tr>
-                                              <td>Standing screen display size</td>
-                                              <td>Screen display Size 10.4</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Color</td>
-                                              <td>Gray, Dark gray, Mystic black</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Screen Resolution</td>
-                                              <td>1920 x 1200 Pixels</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Max Screen Resolution</td>
-                                              <td>2000 x 1200</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Processor</td>
-                                              <td>2.3 GHz (128 GB)</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Graphics Coprocessor</td>
-                                              <td>Exynos 9611, Octa Core (4x2.3GHz + 4x1.7GHz)</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Wireless Type</td>
-                                              <td>802.11a/b/g/n/ac, Bluetooth</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Average Battery Life (in hours)</td>
-                                              <td>13 Hours</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Series</td>
-                                              <td>Samsung Galaxy tab S6 Lite WiFi</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Item model number</td>
-                                              <td>SM-P6102ZAEXOR</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Hardware Platform</td>
-                                              <td>Android</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Operating System</td>
-                                              <td>Android 12</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Batteries</td>
-                                              <td>1 Lithium Polymer batteries required. (included)</td>
-                                           </tr>
-                                           <tr>
-                                              <td>Product Dimensions</td>
-                                              <td>0.28 x 6.07 x 9.63 inches</td>
-                                           </tr>
-                                        </tbody>
-                                     </table>
                                   </div>
                                </div>
                             </div>
@@ -458,7 +359,7 @@
                                            <div class="tp-product-details-review-avater d-flex align-items-start">
                                               <div class="tp-product-details-review-avater-thumb">
                                                  <a href="#">
-                                                    <img src="assets/img/users/user-3.jpg" alt="">
+                                                    <img src="{{url_for('static', filename='img/users/user-3.jpg')}}" alt="">
                                                  </a>
                                               </div>
                                               <div class="tp-product-details-review-avater-content">
@@ -480,7 +381,7 @@
                                            <div class="tp-product-details-review-avater d-flex align-items-start">
                                               <div class="tp-product-details-review-avater-thumb">
                                                  <a href="#">
-                                                    <img src="assets/img/users/user-2.jpg" alt="">
+                                                    <img src="{{url_for('static', filename='img/users/user-2.jpg')}}" alt="">
                                                  </a>
                                               </div>
                                               <div class="tp-product-details-review-avater-content">
@@ -523,7 +424,7 @@
                                                     <textarea id="msg" name="msg" placeholder="Write your review here..."></textarea>
                                                  </div>
                                                  <div class="tp-product-details-review-input-title">
-                                                    <label for="msg">Your Name</label>
+                                                    <label for="msg">Your Remark</label>
                                                  </div>
                                               </div>
                                               <div class="tp-product-details-review-input-box">
@@ -531,7 +432,7 @@
                                                     <input name="name" id="name" type="text" placeholder="Shahnewaz Sakil">
                                                  </div>
                                                  <div class="tp-product-details-review-input-title">
-                                                    <label for="name">Your Name</label>
+                                                    <label for="name">Your Username</label>
                                                  </div>
                                               </div>
                                               <div class="tp-product-details-review-input-box">
@@ -647,7 +548,7 @@
                          <div class="tp-product-item-3 tp-product-style-primary mb-50">
                             <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                <a href="product-details.html">
-                                  <img src="assets/img/product/related/product-related-2.jpg" alt="">
+                                  <img src="{{ url_for('static', filename='img/product/related/product-related-2.jpg') }}" alt="">
                                </a>
 
 
@@ -705,7 +606,7 @@
                          <div class="tp-product-item-3 tp-product-style-primary mb-50">
                             <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                <a href="product-details.html">
-                                  <img src="assets/img/product/related/product-related-3.jpg" alt="">
+                                  <img src="{{ url_for('static', filename='img/product/related/product-related-3.jpg') }}" alt="">
                                </a>
     
                                <!-- product badge -->
@@ -768,7 +669,7 @@
                          <div class="tp-product-item-3 tp-product-style-primary mb-50">
                             <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                <a href="product-details.html">
-                                  <img src="assets/img/product/related/product-related-4.jpg" alt="">
+                                  <img src="{{ url_for('static', filename='img/product/related/product-related-4.jpg') }}" alt="">
                                </a>
     
                                <!-- product badge -->
@@ -844,38 +745,38 @@
                    <nav>
                       <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
                          <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                            <img src="assets/img/product/details/nav/product-details-nav-1.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/nav/product-details-nav-1.jpg') }}" alt="">
                          </button>
                          <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">
-                            <img src="assets/img/product/details/nav/product-details-nav-2.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/nav/product-details-nav-2.jpg') }}" alt="">
                          </button>
                          <button class="nav-link" id="nav-3-tab" data-bs-toggle="tab" data-bs-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">
-                            <img src="assets/img/product/details/nav/product-details-nav-3.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/nav/product-details-nav-3.jpg') }}" alt="">
                          </button>
                          <button class="nav-link" id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">
-                            <img src="assets/img/product/details/nav/product-details-nav-4.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/nav/product-details-nav-4.jpg') }}" alt="">
                          </button>
                       </div>
                    </nav>
                    <div class="tab-content m-img" id="productDetailsNavContent">
                       <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                          <div class="tp-product-details-nav-main-thumb">
-                            <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-1.jpg') }}" alt="">
                          </div>
                       </div>
                       <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab" tabindex="0">
                          <div class="tp-product-details-nav-main-thumb">
-                            <img src="assets/img/product/details/main/product-details-main-2.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-2.jpg') }}" alt="">
                          </div>
                       </div>
                       <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab" tabindex="0">
                          <div class="tp-product-details-nav-main-thumb">
-                            <img src="assets/img/product/details/main/product-details-main-3.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-3.jpg') }}" alt="">
                          </div>
                       </div>
                       <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab" tabindex="0">
                          <div class="tp-product-details-nav-main-thumb">
-                            <img src="assets/img/product/details/main/product-details-main-4.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/product/details/main/product-details-main-4.jpg') }}" alt="">
                          </div>
                       </div>
                     </div>
