@@ -47,7 +47,7 @@
                       <tbody>
                          <tr>
                             <!-- img -->
-                            <td class="tp-cart-img"><a href="product-details.html"> <img src="assets/img/product/cart/product-cart-1.jpg" alt=""></a></td>
+                            <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-1.jpg')}}" alt=""></a></td>
                             <!-- title -->
                             <td class="tp-cart-title"><a href="product-details.html">Legendary Whitetails Wmen's.</a></td>
                             <!-- price -->
@@ -86,7 +86,7 @@
                          </tr>
                          <tr>
                             <!-- img -->
-                            <td class="tp-cart-img"><a href="product-details.html"> <img src="assets/img/product/cart/product-cart-2.jpg" alt=""></a></td>
+                            <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-2.jpg')}}" alt=""></a></td>
                             <!-- title -->
                             <td class="tp-cart-title"><a href="product-details.html">Tommy Hilfiger Women’s Jaden</a></td>
                             <!-- price -->
@@ -123,7 +123,7 @@
                          </tr>
                          <tr>
                             <!-- img -->
-                            <td class="tp-cart-img"><a href="product-details.html"> <img src="assets/img/product/cart/product-cart-3.jpg" alt=""></a></td>
+                            <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-3.jpg')}}" alt=""></a></td>
                             <!-- title -->
                             <td class="tp-cart-title"><a href="product-details.html">Simple Modern School Boys</a></td>
                             <!-- price -->
@@ -160,7 +160,7 @@
                          </tr>
                          <tr>
                             <!-- img -->
-                            <td class="tp-cart-img"><a href="product-details.html"> <img src="assets/img/product/cart/product-cart-4.jpg" alt=""></a></td>
+                            <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-4.jpg')}}" alt=""></a></td>
                             <!-- title -->
                             <td class="tp-cart-title"><a href="product-details.html">Calvin Klein Gabrianna Novelty</a></td>
                             <!-- price -->
@@ -201,8 +201,13 @@
                 <div class="tp-cart-bottom">
                    <div class="row align-items-end">
                       <div class="col-xl-6 col-md-4">
-                         <div class="tp-cart-update">
-                            <a href="cart.html" class="tp-cart-update-btn">Go To Cart</a>
+                         <div class="row">
+                           <div class="col tp-cart-update">
+                              <a href="cart.html" class="tp-cart-update-btn">Go To Cart</a>
+                           </div>
+                           <div class="col tp-cart-update">
+                             <a href="#" class="tp-cart-update-btn">Clear Wishlist</a>
+                          </div>
                          </div>
                       </div>
                    </div>

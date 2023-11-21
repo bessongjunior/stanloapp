@@ -24,7 +24,7 @@ def addWishlist():
 
 @wishlists.route('/wishlist')
 def getWishlist():
-    return render_template('wishlist/wishlist.html')
+    return render_template('wishlist/wishlist.html', title='wishlist')
 
 
 @wishlists.route('/wishlist/<int:code>', methods=['POST'])
