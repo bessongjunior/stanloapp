@@ -12,8 +12,13 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 class BaseConfig():
     
     SECRET_KEY = os.getenv('SECRET_KEY', None)
+    SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT', None)
     if not SECRET_KEY:
         SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
+    
+    if not SECURITY_PASSWORD_SALT:
+        SECURITY_PASSWORD_SALT = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 37 ))
+
 
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', None)
     if not JWT_SECRET_KEY:
@@ -66,3 +71,10 @@ class BaseConfig():
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'platformdb.sqlite3')
 
     UPLOADED_PHOTOS_DEST = os.path.join(BASE_DIR, 'static/images')  #os.path.join(basedir, 'static/images')
+    MAIL_SERVER = 'smtp.gmail.com' #'smtp.googlemail.com'
+    MAIL_PORT = 587#,465  
+    MAIL_USE_TLS= True
+    MAIL_USERNAME = 'juniorbesong8@gmail.com' #os.environ.get('EMAIL_USER')
+    MAIL_PASSWORD = 'rmni qoyl glsc zjzu' #os.environ.get('EMAIL_PASS')
+    MAIL_USE_TLS= True#False
+    MAIL_USE_SSL= False#True

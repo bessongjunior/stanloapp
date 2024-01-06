@@ -19,8 +19,19 @@ def home():
 def about():
     return render_template('main/about.html', title='About')
 
-@main.route('/contact')
+@main.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        # messages = Messages(name=username, email=email, subject=subject, message=message)
+        # db.session.add(messages)
+        # db.session.commit()
+        # print(name,email,subject,message)
+        # flash('Registered successfully')
+        return render_template('main/contact.html', title='contact')
     return render_template('main/contact.html', title='contact')
 
 @main.route('/faq')

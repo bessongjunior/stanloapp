@@ -8,7 +8,7 @@ from datetime import datetime
 from flask_login import UserMixin
 # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer, TimedSerializer as Serializers 
 import json
 
 @login_manager.user_loader
@@ -27,15 +27,18 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return '<Register %r>' % self.name
     
-    def get_reset_token(self, expires_sec=1800):
-        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
+    def get_reset_token(self, expires_sec=3600):
+        # s =  Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        s =  Serializers(current_app.config['SECRET_KEY'], expires_sec)
+        # return s.dumps({'user_id': self.id}).decode('utf-8')
+        return s.dumps({'user_id': self.id}, salt=current_app.config['SECURITY_PASSWORD_SALT']) #.decode('utf-8')
 
     @staticmethod
     def verify_reset_token(token):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        # s = Serializer(current_app.config['SECRET_KEY'])
+        s = Serializers(current_app.config['SECRET_KEY'])
         try:
-            user_id = s.loads(token)['user_id']
+            user_id = s.loads(token,salt=current_app.config['SECURITY_PASSWORD_SALT'])[' user_id']
         except:
             return None
         return User.query.get(user_id)
@@ -77,7 +80,7 @@ class Product(db.Model):
     price = db.Column(db.Numeric(10,2), nullable=False)
     discount = db.Column(db.Integer, default=0)
     stock = db.Column(db.Integer, nullable=False)
-    colors = db.Column(db.Text, nullable=False)
+    # colors = db.Column(db.Text, nullable=False)
     desc = db.Column(db.Text, nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
 
@@ -90,6 +93,8 @@ class Product(db.Model):
     image_1 = db.Column(db.String(150), nullable=False, default='image1.jpg')
     image_2 = db.Column(db.String(150), nullable=False, default='image2.jpg')
     image_3 = db.Column(db.String(150), nullable=False, default='image3.jpg')
+    image_4 = db.Column(db.String(150), nullable=False, default='image4.jpg')
+    image_5 = db.Column(db.String(150), nullable=False, default='image5.jpg')
 
     def __repr__(self):
         return '<Post %r>' % self.name
@@ -113,7 +118,6 @@ class Category(db.Model):
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50),unique=False, nullable=False)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(180),unique=False, nullable=False)

@@ -19019,6 +19019,34 @@ product all slider
   outline: none;
 }
 
+input[type=number] {
+  height: 34px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #DADCE0;
+  background-color: var(--tp-common-white);
+  padding: 0 30px;
+  border-radius: 20px;
+}
+input[type=number] [dir=rtl] {
+  text-align: center;
+}
+input[type=number]:focus {
+  outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /*----------------------------------------*/
 /*  8.19 Cart CSS
 /*----------------------------------------*/

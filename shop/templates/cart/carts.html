@@ -39,26 +39,32 @@
                                <th colspan="2" class="tp-cart-header-product">Product</th>
                                <th class="tp-cart-header-price">Price</th>
                                <th class="tp-cart-header-quantity">Quantity</th>
-                               <th></th>
+                               <th class="tp-cart-header-price">Discount</th>
+                               <th class="tp-cart-header-price">Sub total</th>
+                               <th>Action</th>
                              </tr>
                            </thead>
                            <tbody>
+                              {% for key, product in session['Shoppingcart'].items() %}
+                                 {% set discount =(product.discount/100) * product.price|float %}
                               <tr>
                                  <!-- img -->
-                                 <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-1.jpg')}}" alt=""></a></td>
+                                 <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='uploads/' + product.id|string +'/'+ product.image)}}" alt="{{product.name}}"></a></td>
                                  <!-- title -->
-                                 <td class="tp-cart-title"><a href="product-details.html">Legendary Whitetails Wmen's.</a></td>
+                                 <td class="tp-cart-title"><a href="product-details.html">{{product.name}}</a></td>
                                  <!-- price -->
-                                 <td class="tp-cart-price"><span>$76.00</span></td>
+                                 <form id="updatecartform" action="{{url_for('carts.updatecart', code=key)}}" method="post">
+                                 <td class="tp-cart-price"><span>${{"%.2f"|format(product.price)}}</span></td>
                                  <!-- quantity -->
                                  <td class="tp-cart-quantity">
+                                    <!-- tp-cart-quantity -->
                                     <div class="tp-product-quantity mt-10 mb-10">
                                        <span class="tp-cart-minus">
                                           <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                           </svg>                                                             
                                        </span>
-                                       <input class="tp-cart-input" type="text" value="1">
+                                       <input class="tp-cart-input" type="number" min="1" max="400" name="quantity" value="{{product.quantity}}">
                                        <span class="tp-cart-plus">
                                           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                              <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -67,126 +73,35 @@
                                        </span>
                                     </div>
                                  </td>
+
+                                 <!-- <td class="tp-cart-price">5% is $90</td> -->
+                                 {% if product.discount  %}
+                                 <td class="tp-cart-price">{{product.discount}}% is {{"%.2f"|format(discount)}}</td>
+                                 {% else %}
+                                 <td class="tp-cart-price"></td>
+                                 {% endif %}
                                  <!-- action -->
+                                 {% set subtotal = product.quantity|int * product.price|float  %}
+                                 <td class="tp-cart-price">${{"%.2f"|format(subtotal - discount|round(1,'floor')) }}</td>
+                              </form>
                                  <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
+                                    <a class="tp-cart-action-btn" href="{{url_for('carts.deleteitem', id=key)}}">
                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
                                        </svg>
                                        <span>Remove</span>
-                                    </button>
+                                    </a>
                                  </td>
                               </tr>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-2.jpg')}}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="product-details.html">Tommy Hilfiger Women’s Jaden</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$44.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-3.jpg')}}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="product-details.html">Simple Modern School Boys</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$62.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="product-details.html"> <img src="{{url_for('static', filename='img/product/cart/product-cart-4.jpg')}}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="product-details.html">Calvin Klein Gabrianna Novelty</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$93.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
+                              {% endfor %}
                            </tbody>
                          </table>
                      </div>
                      <div class="tp-cart-bottom">
                         <div class="row align-items-end">
-                           <div class="col-xl-6 col-md-8">
+                           <div class="col-xl-5 col-md-4">
                               <div class="tp-cart-coupon">
-                                 <form action="#">
+                                 <form action="" method="post">
                                     <div class="tp-cart-coupon-input-box">
                                        <label>Coupon Code:</label>
                                        <div class="tp-cart-coupon-input d-flex align-items-center">
@@ -197,15 +112,23 @@
                                  </form>
                               </div>
                            </div>
+                           
                            <div class="col-xl-6 col-md-4">
-                              <div class="tp-cart-update text-md-end">
-                                 <button type="button" class="tp-cart-update-btn">Update Cart</button>
+                              <div class='tp-cart-update text-md-end'>
+                                 <div class="d-flex mx-3 align-items-end">
+                                    <a  href="{{url_for('carts.clearcart')}}" class="tp-cart-update-btn mx-4">Clear Cart</a>
+                                 <!-- </div>
+                                 <div class="col tp-cart-update text-md-end"> -->
+                                    <button form="updatecartform" type="button" class="tp-cart-update-btn mx-3 _submitupdatecartform">Update Cart</button>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
+                     
                   </div>
-                  <div class="col-xl-3 col-lg-4 col-md-6">
+                  <!-- <div class="col-xl-3 col-lg-4 col-md-6"> -->
+                     <div class="my-5">
                      <div class="tp-cart-checkout-wrapper">
                         <div class="tp-cart-checkout-top d-flex align-items-center justify-content-between">
                            <span class="tp-cart-checkout-top-title">Subtotal</span>
@@ -230,14 +153,19 @@
                            </div>
                         </div>
                         <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
+                           <span>Tax</span>
+                           <span>${{tax}}</span>
+                        </div>
+                        <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
                            <span>Total</span>
-                           <span>$724</span>
+                           <span>${{grandtotal}}</span>
                         </div>
                         <div class="tp-cart-checkout-proceed">
-                           <a href="checkout.html" class="tp-cart-checkout-btn w-100">Proceed to Checkout</a>
+                           <a href="{{url_for('checkout.getorder')}}" class="tp-cart-checkout-btn w-100">Proceed to Checkout</a>
                         </div>
                      </div>
-                  </div>
+                  </div> <!-- for the my-5 -->
+                  <!-- </div> -->
                </div>
             </div>
          </section>
@@ -245,8 +173,29 @@
 
       </main>
 
+      <script>
+         const myForm = document.getElementById("updatecartform");
+         document.querySelector("._submitupdatecartform").addEventListener("click", function () {
+           myForm.submit();
+         });
+         </script>
 
 
 {% include 'footer.html' %}
 
 {% endblock %}
+
+
+<!-- The criteria for fetching related products can vary depending on the specific needs of your application. Here are a few common approaches:
+
+    Brand: If your customers tend to be brand loyal, fetching related products from the same brand can be a good approach.
+
+    Category: You can fetch products that fall into the same category (e.g., shoes, electronics, books). This can be useful if your customers are browsing for a specific type of product.
+
+    User Behavior: You can analyze user behavior to determine related products. For example, you can fetch products that are often viewed or purchased together.
+
+    Product Features: You can fetch products that have similar features. For example, if a customer is looking at a blue shirt, you might fetch other blue clothing items.
+
+    Ratings and Reviews: You can fetch products that have high ratings and reviews. This can help promote quality products.
+
+Remember, the best approach depends on your specific use case and the data you have available. You might also use a combination of these approaches for better results. It’s also a good idea to continuously test and refine your approach based on user feedback and behavior. -->

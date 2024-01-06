@@ -46,38 +46,41 @@
                       <h3 class="tp-login-title">Reset Password</h3>
                       <p>Enter your email address to request password reset.</p>
                    </div>
-                   <div class="tp-login-option">
-                      <div class="tp-login-input-wrapper">
-                         <div class="tp-login-input-box">
-                            <div class="tp-login-input">
-                               <!-- <input id="email" type="email" placeholder="shofy@mail.com"> -->
-                               {% if form.email.errors %}
-                                    {{ form.email(class="tp-login-input is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.email.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form.email(placeholder="e.g serenova1@mail.com") }}
-                                {% endif %}
-                            </div>
-                            <div class="tp-login-input-title">
-                                {{ form.email.label() }}
-                            </div>
-                         </div>
-                      </div>
-                      <div class="tp-login-bottom mb-15">
-                         <!-- <button type="submit" class="tp-login-btn w-100">Send Mail</button> -->
-                         {{ form.submit(type="submit", class="tp-login-btn w-100 border-none") }}
-                      </div>
-                      <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-center">
-                         <div class="tp-login-forgot">
-                            <span>Remember Password? <a href="{{url_for('auth.login')}}"> Login</a></span>
-                            
-                         </div>
-                      </div>
-                   </div>
+                   <form action="" method="post">
+                     {{ form.csrf_token }}
+                     <div class="tp-login-option">
+                        <div class="tp-login-input-wrapper">
+                           <div class="tp-login-input-box">
+                              <div class="tp-login-input">
+                                 <!-- <input id="email" type="email" placeholder="shofy@mail.com"> -->
+                                 {% if form.email.errors %}
+                                       {{ form.email(class="tp-login-input is-invalid") }}
+                                       <div class="invalid-feedback">
+                                          {% for error in form.email.errors %}
+                                             <span>{{ error }}</span>
+                                          {% endfor %}
+                                       </div>
+                                 {% else %}
+                                       {{ form.email(placeholder="e.g serenova1@mail.com") }}
+                                 {% endif %}
+                              </div>
+                              <div class="tp-login-input-title">
+                                 {{ form.email.label() }}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-login-bottom mb-15">
+                           <!-- <button type="submit" class="tp-login-btn w-100">Send Mail</button> -->
+                           {{ form.submit(type="submit", class="tp-login-btn w-100 border-none") }}
+                        </div>
+                        <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-center">
+                           <div class="tp-login-forgot">
+                              <span>Remember Password? <a href="{{url_for('auth.login')}}"> Login</a></span>
+                              
+                           </div>
+                        </div>
+                     </div>
+                   </form>
                 </div>
              </div>
           </div>

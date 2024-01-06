@@ -1,8 +1,8 @@
-from wtforms import Form, StringField, TextAreaField, PasswordField,SubmitField,validators, ValidationError,IntegerField,FloatField
+from wtforms import Form, StringField, TextAreaField, PasswordField,SubmitField,validators, ValidationError,IntegerField,FloatField, DecimalField, SelectField
 from flask_wtf.file import FileRequired,FileAllowed, FileField
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 from flask_login import current_user
 from .models import User, Admin
 
@@ -10,9 +10,11 @@ class UserRegistrationForm(FlaskForm):
     # name = StringField('Name: ')
     username = StringField('Username: ', [validators.DataRequired()])
     email = StringField('Email: ', [validators.Email(), validators.DataRequired()])
-    password = PasswordField('Password: ', [validators.DataRequired(), validators.EqualTo('confirm', message=' Both password must match! ')])
+    # password = PasswordField('Password: ', [validators.DataRequired(), validators.EqualTo('confirm_password', message=' Both password must match! ')])
+    password = PasswordField('Password: ', [validators.DataRequired(), validators.EqualTo('confirm_password', message=' Both password must match! ')])
     confirm_password = PasswordField('Repeat Password: ', [validators.DataRequired()])
     # terms = BooleanField('Terms of service and Privacy')
+    terms = BooleanField('I accept the terms of the Services & Privacy Policy', validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
@@ -59,8 +61,7 @@ class UserUpdateAccountForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
     def validate_email(self, email):
@@ -71,8 +72,7 @@ class RequestResetForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
     
 
@@ -106,15 +106,34 @@ class Addproducts(FlaskForm):
     image_5 = FileField('Image 5', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
 
 
+class ProductForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(max=80)])
+    price = DecimalField('Price', validators=[DataRequired(), NumberRange(min=0)])
+    discount = IntegerField('Discount', default=0)
+    stock = IntegerField('Stock', validators=[DataRequired()])
+# colors = StringField('Colors', validators=[DataRequired()])
+    desc = TextAreaField('Description', validators=[DataRequired()])
+    category = SelectField('Category', coerce=int)  # to be populated with categories from the database
+    brand = SelectField('Brand', coerce=int)  # to be populated with brands from the database
+    # image_1 = StringField('Image 1', default='image1.jpg')
+    # image_2 = StringField('Image 2', default='image2.jpg')
+    # image_3 = StringField('Image 3', default='image3.jpg')
+    # image_4 = StringField('Image 4', default='image4.jpg')
+    # image_5 = StringField('Image 5', default='image5.jpg')
+    image_1 = FileField('Image 1')
+    image_2 = FileField('Image 2')
+    image_3 = FileField('Image 3')
+    image_4 = FileField('Image 4')
+    image_5 = FileField('Image 5')
+    submit = SubmitField('Submit')
+
 class AdminRegistrationForm(FlaskForm):
-    name = StringField('Name', [validators.Length(min=4, max=25)])
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email Address', [validators.Length(min=6, max=35)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
+    '''admin registration  form'''
+
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Register')
 
     def validate_username(self, field):
         if Admin.query.filter_by(username=field.data).first():
@@ -126,7 +145,11 @@ class AdminRegistrationForm(FlaskForm):
             raise ValidationError('Email already registered.')
             
 
-
 class AdminLoginForm(FlaskForm):
-    email = StringField('Email Address', [validators.Length(min=6, max=35)])
-    password = PasswordField('New Password', [validators.DataRequired()])
+    '''admin login  form '''
+    # email = StringField('Email Address', [validators.Length(min=6, max=35)])
+    # password = PasswordField('New Password', [validators.DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Sign in')

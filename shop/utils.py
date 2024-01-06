@@ -5,6 +5,7 @@ from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from shop import mail
+from shop.models import Brand, Category
 
 
 def save_picture(form_picture):
@@ -27,7 +28,16 @@ def send_reset_email(user):
                   sender='noreply@demo.com',
                   recipients=[user.email])
     msg.body = f'''To reset your password, visit the following link:
-    {url_for('users.reset_token', token=token, _external=True)}
+    {url_for('auth.reset_token', token=token, _external=True)}
     If you did not make this request then simply ignore this email and no changes will be made.
     '''
     mail.send(msg)
+
+def brands():
+    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+    return brands
+
+def categories():
+    categories = Category.query.join(Addproduct,(Category.id == Addproduct.category_id)).all()
+    return categories
+
