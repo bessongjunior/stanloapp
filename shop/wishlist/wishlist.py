@@ -27,17 +27,6 @@ def getWishlist():
     return render_template('wishlist/wishlist.html', title='wishlist')
 
 
-@wishlists.route('/wishlist/<int:code>', methods=['POST'])
-def updateWishlist():
-    pass
-
-
-@wishlists.route('/wishlist<int:id>')
-def deleteWishlist():
-    pass
-
-
-
 @wishlists.route('/clearwishlist')
 def clearWishlist():
     pass

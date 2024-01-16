@@ -55,15 +55,15 @@ def getcart():
         subtotal += float(product['price']) * int(product['quantity'])
         subtotal -= discount
 
-        tax =("%.2f" %(.06 * float(subtotal)))
-        grandtotal = float("%.2f" % (1.06 * subtotal))
+        # tax =("%.2f" %(.06 * float(subtotal)))
+        # grandtotal = float("%.2f" % (1.06 * subtotal))
 
-    # if 'coupon' in session:
-    #     coupon_discount = (session['coupon']['discount_percentage']/100) * subtotal
-    #     subtotal -= coupon_discount
+    if 'coupon' in session:
+        coupon_discount = (session['coupon']['discount_percentage']/100) * subtotal
+        subtotal -= coupon_discount
 
-    # tax = float("%.2f" % (.06 * subtotal))
-    # grandtotal = float("%.2f" % (1.06 * subtotal))
+    tax = float("%.2f" % (.06 * subtotal))
+    grandtotal = float("%.2f" % (1.06 * subtotal))
     return render_template('cart/carts.html', title='cart')
 
 
@@ -112,36 +112,33 @@ def clearcart():
         print(e)
 
 
-# @carts.route('/createcoupon', methods=['POST'])
-# def create_coupon():
-#     try:
-#         coupon_code = request.form.get('coupon_code')
-#         discount_percentage = float(request.form.get('discount_percentage'))
-#         coupon = Coupon(coupon_code=coupon_code, discount_percentage=discount_percentage)
-#         db.session.add(coupon)
-#         db.session.commit()
-#         flash('Coupon created successfully!')
-#     except Exception as e:
-#         print(e)
-#     finally:
-#         return redirect(request.referrer)
+@carts.route('/createcoupon', methods=['POST'])
+def create_coupon():
+    try:
+        coupon_code = request.form.get('coupon_code')
+        discount_percentage = float(request.form.get('discount_percentage'))
+        coupon = Coupon(coupon_code=coupon_code, discount_percentage=discount_percentage)
+        db.session.add(coupon)
+        db.session.commit()
+        flash('Coupon created successfully!')
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(request.referrer)
 
-# @carts.route('/applycoupon', methods=['POST'])
-# def apply_coupon():
-#     try:
-#         coupon_code = request.form.get('coupon_code')
-#         coupon = Coupon.query.filter_by(coupon_code=coupon_code).first()
-#         if coupon:
-#             session['coupon'] = {'coupon_code': coupon.coupon_code, 'discount_percentage': coupon.discount_percentage}
-#             flash('Coupon applied successfully!')
-#         else:
-#             flash('Invalid coupon code!')
-#     except Exception as e:
-#         print(e)
-#     finally:
-#         return redirect(request.referrer)
+@carts.route('/applycoupon', methods=['POST'])
+def apply_coupon():
+    try:
+        coupon_code = request.form.get('coupon_code')
+        coupon = Coupon.query.filter_by(coupon_code=coupon_code).first()
+        if coupon:
+            session['coupon'] = {'coupon_code': coupon.coupon_code, 'discount_percentage': coupon.discount_percentage}
+            flash('Coupon applied successfully!')
+        else:
+            flash('Invalid coupon code!')
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(request.referrer)
 
 
-# if 'coupon' in session:
-#     discount = (session['coupon']['discount_percentage']/100) * subtotal
-#     subtotal -= discount

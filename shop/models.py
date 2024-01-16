@@ -131,3 +131,7 @@ class Admin(db.Model):
 
 # db.create_all()
 
+class Coupon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    coupon_code = db.Column(db.String(80), unique=True, nullable=False)
+    discount_percentage = db.Column(db.Integer)

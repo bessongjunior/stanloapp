@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, request, redirect,url_for, flash, current_app
 from shop import db
 from shop.models import Category,Brand,Product
-from shop.forms import Addproducts
+from shop.forms import ProductForm
 import secrets
 import os
 

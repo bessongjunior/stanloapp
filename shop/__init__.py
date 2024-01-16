@@ -91,7 +91,7 @@ def create_app(config_class=BaseConfig):
     from shop.auth.routes import auth
     from shop.products.routes import product
     from shop.cart.carts import carts
-    from shop.checkout.checkout import checkout
+    from shop.checkout.checkout import orders
     from shop.wishlist.wishlist import wishlists
     from shop.admin.routes import admin #.register_blueprint(users)
     # app.register_blueprint(users)
@@ -101,7 +101,7 @@ def create_app(config_class=BaseConfig):
     app.register_blueprint(auth)
     app.register_blueprint(product)
     app.register_blueprint(carts)
-    app.register_blueprint(checkout)
+    app.register_blueprint(orders)
     app.register_blueprint(wishlists)
     app.register_blueprint(admin)
 
