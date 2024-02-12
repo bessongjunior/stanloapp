@@ -88,22 +88,33 @@ class UserLoginForm(FlaskForm):
 
 
 class UserDeliveryForm(FlaskForm):
-    pass
+    firstname: str = StringField('Firstname: ')
+    lasttname: str = StringField('Lastname: ')
+    companyname: str = StringField('Companyname: ')
+    Country_region: str = StringField('Country/Region: ')
+    street: str = StringField("Street address: ")
+    # street_optional: str = StringField()
+    town_city: str = StringField("Town / City :")
+    state_country: str = StringField("State / Country :")
+    phone: str = StringField("Phone :")
+    email = StringField('Email: ', [validators.Email(), validators.DataRequired()])
+    order_notes: str = StringField("Notes about your order: ")
+    submit = SubmitField('Login')
 
 
-# class Addproducts(FlaskForm):
-#     name = StringField('Name', [validators.DataRequired()])
-#     price = FloatField('Price', [validators.DataRequired()])
-#     discount = IntegerField('Discount', default=0)
-#     stock = IntegerField('Stock', [validators.DataRequired()])
-#     colors = StringField('Colors', [validators.DataRequired()])
-#     discription = TextAreaField('Discription', [validators.DataRequired()])
+class Addproducts(FlaskForm):
+    name = StringField('Name', [validators.DataRequired()])
+    price = FloatField('Price', [validators.DataRequired()])
+    discount = IntegerField('Discount', default=0)
+    stock = IntegerField('Stock', [validators.DataRequired()])
+    colors = StringField('Colors', [validators.DataRequired()])
+    discription = TextAreaField('Discription', [validators.DataRequired()])
 
-#     image_1 = FileField('Image 1', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
-#     image_2 = FileField('Image 2', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
-#     image_3 = FileField('Image 3', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
-#     image_4 = FileField('Image 4', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
-#     image_5 = FileField('Image 5', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
+    image_1 = FileField('Image 1', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
+    image_2 = FileField('Image 2', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
+    image_3 = FileField('Image 3', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
+    image_4 = FileField('Image 4', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
+    image_5 = FileField('Image 5', validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg'], 'Images only please')])
 
 
 class ProductForm(FlaskForm):
@@ -115,11 +126,6 @@ class ProductForm(FlaskForm):
     desc = TextAreaField('Description', validators=[DataRequired()])
     category = SelectField('Category', coerce=int)  # to be populated with categories from the database
     brand = SelectField('Brand', coerce=int)  # to be populated with brands from the database
-    # image_1 = StringField('Image 1', default='image1.jpg')
-    # image_2 = StringField('Image 2', default='image2.jpg')
-    # image_3 = StringField('Image 3', default='image3.jpg')
-    # image_4 = StringField('Image 4', default='image4.jpg')
-    # image_5 = StringField('Image 5', default='image5.jpg')
     image_1 = FileField('Image 1')
     image_2 = FileField('Image 2')
     image_3 = FileField('Image 3')

@@ -19,14 +19,60 @@ def MagerDicts(dict1,dict2):
 
 @wishlists.route('/wishlist', methods=['POST'])
 def addWishlist():
-    pass
+    try:
+        product_id = request.form.get('product_id')
+        quantity = int(request.form.get('quantity'))
+        product = Product.query.filter_by(id=product_id).first()
+
+        if request.method =="POST":
+            DictItems = {product_id:{'id': product.id, 'name':product.name,'price':float(product.price), 'quantity':quantity, 'image': product.image_1 }}
+            if 'Wishlist' in session:
+                print(session['Wishlist'])
+                if product_id in session['Wishlist']:
+                    for key, item in session['Wishlist'].items():
+                        if int(key) == int(product_id):
+                            session.modified = True
+                            item['quantity'] += 1
+                else:
+                    session['Wishlist'] = MagerDicts(session['Wishlist'], DictItems)
+                    return redirect(request.referrer)
+            else:
+                session['Wishlist'] = DictItems
+                return redirect(request.referrer)
+              
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(request.referrer)
 
 
 @wishlists.route('/wishlist')
 def getWishlist():
+    if 'Wishlist' not in session or len(session['Wishlist']) <= 0:
+        return redirect(url_for('main.home'))
+    print(session['Wishlist'])
     return render_template('wishlist/wishlist.html', title='wishlist')
+
+
+@wishlists.route('/deleteitem/<int:id>')
+def deleteitem(id):
+    if 'Wishlist' not in session or len(session['Wishlist']) <= 0:
+        return redirect(url_for('main.home'))
+    try:
+        session.modified = True
+        for key , item in session['Wishlist'].items():
+            if int(key) == id:
+                session['Wishlist'].pop(key, None)
+                return redirect(url_for('wishlists.getWishlist'))
+    except Exception as e:
+        print(e)
+        return redirect(url_for('wishlists.Wishlist'))
 
 
 @wishlists.route('/clearwishlist')
 def clearWishlist():
-    pass
+    try:
+        session.pop('Wishlist', None)
+        return redirect(url_for('main.home'))
+    except Exception as e:
+        print(e)

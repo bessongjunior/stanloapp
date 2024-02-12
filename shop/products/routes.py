@@ -26,7 +26,16 @@ def categories():
 def shop():
     page = request.args.get('page', 1, type=int)
     products = Product.query.filter(Product.stock > 0).order_by(Product.id.desc()).paginate(page=page, per_page=8)
-    return render_template('products/shop-list.html', title='shop listing', products=products, brands=brands(),categories=categories())
+    categories_with_counts = {}
+
+    # Iterate through products to count categories
+    for product in products:
+        category = product.category  # Assuming category is a property of Product
+        if category in categories_with_counts:
+            categories_with_counts[category] += 1
+        else:
+            categories_with_counts[category] = 1
+    return render_template('products/shop-list.html', title='shop listing', products=products, brands=brands(),categories=categories(), categories_with_counts=categories_with_counts)
 
 
 

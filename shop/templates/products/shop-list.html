@@ -83,13 +83,32 @@
                                <li><a href="#">Electronics <span>29</span></a></li>
                                <li><a href="#">Phones <span>05</span></a></li>
                                <li><a href="#">Grocery <span>14</span></a></li>
+                               <ul>
+                                 {% for category, count in categories_with_counts.items() %}
+                                     <li><a href="#">{{ category.name }} <span>{{ count }}</span></a></li>
+                                 {% endfor %}
+                             </ul>
                             </ul>
                          </div>
                       </div>
                    </div>
+                   
+                   <!-- <div class="tp-shop-widget mb-50">
+                     <h3 class="tp-shop-widget-title">Categories</h3>
+                     <div class="tp-shop-widget-content">
+                         <div class="tp-shop-widget-categories">
+                             <ul>
+                                 % for category, count in categories_with_counts.items() %}
+                                     <li><a href="#">{{ category }} <span>{{ count }}</span></a></li>
+                                 % endfor %}
+                             </ul>
+                         </div>
+                     </div>
+                 </div> -->
+                 
                    <!-- color -->
                    <div class="tp-shop-widget mb-50">
-                      <h3 class="tp-shop-widget-title">Filter by Color</h3>
+                      <h3 class="tp-shop-widget-title">Filter by Pallettes</h3>
 
                       <div class="tp-shop-widget-content">
                          <div class="tp-shop-widget-checkbox-circle-list">
